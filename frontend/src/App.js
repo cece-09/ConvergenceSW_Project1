@@ -8,8 +8,7 @@ import { SearchBar } from "./Components/google-maps-api";
 function App() {
   return (
     <div>
-      <GMAP.initMap>
-      </GMAP.initMap>
+      <GMAP.initMap/>
     </div>
   );
 }
