@@ -5,10 +5,13 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const searchbar = React.createElement("div", { id: "autocomplete" });
 root.render(
-  // <React.StrictMode>
-  <App />
-  // </React.StrictMode>
+  //<React.StrictMode>
+  <div>
+    <App />
+  </div>
+  //</React.StrictMode>
 );
 
 // React.StrictMode is debug tool provided by React

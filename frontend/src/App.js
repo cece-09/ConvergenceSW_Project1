@@ -1,12 +1,17 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import GmapLoader from "./Components/GmapLoader";
-import GmapAutocomplete from "./Components/GmapAutocomplete";
+import React from "react";
+import * as GMAP from "./Components/GmapLoader";
 import Data from "./Components/Data";
+import { SearchBar } from "./Components/google-maps-api";
+// import {Flex} from '@mui/material'
 
 function App() {
-  return <GmapAutocomplete />;
+  return (
+    <div>
+      <GMAP.initMap>
+      </GMAP.initMap>
+    </div>
+  );
 }
 
 export default App;
