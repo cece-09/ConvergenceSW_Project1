@@ -6,15 +6,15 @@ import {
   GoogleMap,
   useJsApiLoader,
   LoadScript,
-  PlaceResult
+  PlaceResult,
 } from "@react-google-maps/api";
+import { APIKey } from "../key";
 
 const libs = ["places"];
 
 function GmapLoader({ containerStyle, center, zoom }) {
-  console.log(process.env.GOOGLE_API_KEY);
   return (
-    <LoadScript googleMapsApiKey={process.env.GOOGLE_API_KEY} libraries={libs}>
+    <LoadScript googleMapsApiKey={APIKey.key} libraries={libs}>
       <GoogleMap center={center} zoom={zoom} mapContainerStyle={containerStyle}>
         <Autocomplete
           onLoad={() => {
@@ -23,7 +23,7 @@ function GmapLoader({ containerStyle, center, zoom }) {
           onPlaceChanged={(place) => {
             console.log(place.getPlace());
           }}
-          fields = {['geometry', 'name', 'address_components']}
+          fields={["geometry", "name", "address_components"]}
           types={["establishment"]}
         >
           <input
