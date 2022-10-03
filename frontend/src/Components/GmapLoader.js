@@ -1,4 +1,5 @@
 import "../App.css";
+
 import React from "react";
 import {
   Autocomplete,
@@ -7,13 +8,13 @@ import {
   LoadScript,
   PlaceResult
 } from "@react-google-maps/api";
-import { APIKey } from "../key";
 
 const libs = ["places"];
 
 function GmapLoader({ containerStyle, center, zoom }) {
+  console.log(process.env.GOOGLE_API_KEY);
   return (
-    <LoadScript googleMapsApiKey={APIKey.key} libraries={libs}>
+    <LoadScript googleMapsApiKey={process.env.GOOGLE_API_KEY} libraries={libs}>
       <GoogleMap center={center} zoom={zoom} mapContainerStyle={containerStyle}>
         <Autocomplete
           onLoad={() => {
