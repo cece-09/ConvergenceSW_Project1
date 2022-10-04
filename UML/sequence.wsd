@@ -1,0 +1,35 @@
+@startuml
+
+title [초기 진입] 출발지 선택 Usecase
+
+actor user
+boundary bnd
+control ctr
+entity userLocation
+entity place
+entity meeting
+actor api
+actor Django
+
+autonumber
+user -> bnd : 검색창 입력
+bnd -> ctr : 검색창 입력
+ctr -> api : autocomplete(input)
+api -> ctr : place list
+ctr -> bnd : place list
+bnd -> user : 장소 목록
+user -> bnd : 출발지 선택, 
+bnd -> ctr : place_chaged
+ctr -> ctr : getPlace()
+ctr -> userLocation : locationObj
+userLocation -> meeting : locationObj, userInfo
+meeting -> Django : POST Django
+Django -> meeting : meetingObj, request status
+meeting -> ctr : meetingObj, request status
+ctr -> bnd : meetingObj.locationObj
+bnd -> user : 선택된 출발지의 주소
+ctr -> ctr : mapify(meetingObj)
+ctr -> bnd : mapObj
+bnd -> user : 지도 화면
+
+@enduml

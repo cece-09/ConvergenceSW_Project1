@@ -1,41 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style/modal.module.css";
-import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
-import { APIKey } from "../key";
+import { Autocomplete, useLoadScript } from "@react-google-maps/api";
 
-const Modal = ({}) => {
-  const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: APIKey.key,
-  });
+const Modal = ({ onSave, toggle }) => {
+  // use state to save input
+  const [item, setItem] = useState({});
+  const [autocomplete, setAutocomplete] = useState({});
+  useEffect(() => {
+    //console.log(item);
+  }, [item]);
 
-  const onLoad = (mapInstance) => {
-    console.log(mapInstance);
+  // functions binded
+  const onLoad = (autocompleteInstance) => {
+    setAutocomplete(autocompleteInstance);
   };
-  const onPlaceChanged = (placeInstance) => {
-    console.log(placeInstance.getPlace());
+  const onPlaceChanged = () => {
+    const place = autocomplete.getPlace();
+    setItem({...item, ['place']:place})
   };
-  return isLoaded ? (
+  const handleChange = (e) => {
+    setItem({ ...item, [e.target.name]: e.target.value });
+  };
+
+  // render Modal component
+  return toggle ? (
     <div className={style.container}>
-      <h1>Enter Your Information</h1>
-      <input type="text" placeholder="Your name"></input>
-      <Autocomplete
-        onLoad={onLoad}
-        onPlaceChanged={onPlaceChanged}
-        fields={["geometry", "name", "address_components"]}
-        types={["establishment"]}
-      >
-        <input type="text" placeholder="Your address"></input>
-      </Autocomplete>
-      <button
-        onClick={(place) => {
-          console.log(place.getPlace());
-        }}
-      >
-        Save
-      </button>
+      <div className={style.modal}>
+        <h1>Enter Your Information</h1>
+        <form>
+          <input
+            type="text"
+            placeholder="Your name"
+            name="username"
+            autoComplete="off"
+            onChange={handleChange}
+          ></input>
+          <Autocomplete
+            onLoad={onLoad}
+            onPlaceChanged={onPlaceChanged}
+            fields={["geometry", "name", "address_components"]}
+            types={["establishment"]}
+          >
+            <input
+              type="text"
+              placeholder="Your address"
+              name="userlocation"
+            ></input>
+          </Autocomplete>
+        </form>
+        <button onClick={() => onSave(item)}>Save</button>
+      </div>
     </div>
   ) : (
-    console.log(loadError)
+    <></>
   );
 };
 

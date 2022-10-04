@@ -1,0 +1,15 @@
+.container{
+
+}
+.navbar{
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+    padding: 10px 20px;
+}
+.navbar ul {
+    display: flex;
+}
+.navbar ul li {
+    margin-left: 10px;
+}

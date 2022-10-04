@@ -14,7 +14,6 @@ const libs = ["places"];
 
 function GmapLoader({ containerStyle, center, zoom }) {
   return (
-    <LoadScript googleMapsApiKey={APIKey.key} libraries={libs}>
       <GoogleMap center={center} zoom={zoom} mapContainerStyle={containerStyle}>
         <Autocomplete
           onLoad={() => {
@@ -41,14 +40,12 @@ function GmapLoader({ containerStyle, center, zoom }) {
               outline: `none`,
               textOverflow: `ellipses`,
               position: "absolute",
-              top: "10px",
               left: "50%",
-              marginLeft: "-120px",
+              marginLeft: "-120px"
             }}
           ></input>
         </Autocomplete>
       </GoogleMap>
-    </LoadScript>
   );
 }
 
